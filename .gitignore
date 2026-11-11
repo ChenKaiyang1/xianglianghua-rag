@@ -1,0 +1,11 @@
+# 本地环境与缓存
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.log
+.env
+
+# 本地 Embedding 模型（约 900MB，见 README「模型准备」自行下载）
+xianglianghuamoxing/

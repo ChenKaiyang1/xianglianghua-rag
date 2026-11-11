@@ -1,0 +1,83 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Local Custom Tools",
+    "description": "Weather / read URL / FAQ DB tools for Dify Agent",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://host.docker.internal:8100"
+    }
+  ],
+  "paths": {
+    "/weather": {
+      "get": {
+        "description": "Get current weather for a city using Open-Meteo (free, no API key).",
+        "operationId": "GetCurrentWeather",
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "description": "City name in English, e.g. Beijing or Shenzhen",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/read_url": {
+      "post": {
+        "description": "Fetch a web page and return plain text content.",
+        "operationId": "ReadUrl",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "http or https URL to fetch"
+                  },
+                  "max_chars": {
+                    "type": "integer",
+                    "description": "max characters to return, default 2000",
+                    "default": 2000
+                  }
+                },
+                "required": ["url"]
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/db_faq": {
+      "get": {
+        "description": "Search local FAQ SQLite database by keyword.",
+        "operationId": "SearchFaqDb",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "keyword, e.g. refund / computer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "deprecated": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
